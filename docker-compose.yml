@@ -4,3 +4,14 @@ services:
     build: "."
     ports:
       - "8080:8080"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: water-gallery
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./env/docker/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
