@@ -8,8 +8,17 @@ jobs:
       - restore_cache:
           key: v1-mvn-cache-{{ checksum "pom.xml" }}
       - run:
-          name: Install dependencies
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: test & build
           command: ./mvnw clean package
+      - run:
+          name: docker build image
+          command: docker build --tag latest
+      - run:
+          name: image push
+          command: docker push <hub-user>/<repo-name>:<tag>
       - save_cache:
           paths:
             - ~/.mvn/wrapper
