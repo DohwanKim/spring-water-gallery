@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+    environment:
+      HUB_REPO: spring_water-gallery
     steps:
       - checkout
       - restore_cache:
@@ -15,10 +17,10 @@ jobs:
           command: ./mvnw clean package
       - run:
           name: docker build image
-          command: docker build --tag latest
+          command: docker build . --tag ${HUB_USER}/${HUB_REPO}
       - run:
           name: image push
-          command: docker push <hub-user>/<repo-name>:<tag>
+          command: docker push ${HUB_USER}/${HUB_REPO}:latest
       - save_cache:
           paths:
             - ~/.mvn/wrapper
@@ -27,5 +29,9 @@ jobs:
           root: .
           paths:
             - build
-  deploy:
-    -
+
+workflows:
+  version: 3.9
+  spring_deploy:
+    jobs:
+      - build
