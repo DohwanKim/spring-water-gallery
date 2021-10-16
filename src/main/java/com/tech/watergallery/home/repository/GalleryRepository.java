@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @Mapper
 public interface GalleryRepository {
-    public int create();
-    public int update();
-    public Optional<Gallery> find(long id);
+    int create(Gallery gallery);
+    int update();
+    Optional<Gallery> find(long id);
 }
