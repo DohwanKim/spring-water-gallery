@@ -4,10 +4,10 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Gallery {
     private Long id;
     @NonNull
