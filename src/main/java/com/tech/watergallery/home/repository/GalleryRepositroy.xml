@@ -5,10 +5,6 @@
 <mapper namespace="com.tech.watergallery.home.repository.GalleryRepository">
     <resultMap id="entity" type="com.tech.watergallery.home.entity.Gallery" autoMapping="true">
         <id property="id" column="id"/>
-        <result property="title" column="title"/>
-        <result property="description" column="description"/>
-        <result property="content" column="content"/>
-        <result property="completed" column="completed"/>
     </resultMap>
 
     <sql id="selectColumns">
@@ -33,6 +29,11 @@
         SELECT <include refid="selectColumns"/>
         FROM `gallery`
         WHERE `id` = #{id}
+    </select>
+
+    <select id="findAll" resultMap="entity">
+        SELECT <include refid="selectColumns"/>
+        FROM `gallery`
     </select>
 
     <update id="update">

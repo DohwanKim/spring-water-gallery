@@ -1,0 +1,2 @@
+ALTER TABLE gallery
+    ADD img_url VARCHAR(256) UNIQUE KEY NOT NULL AFTER completed
