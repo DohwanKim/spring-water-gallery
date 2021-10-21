@@ -13,7 +13,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authz -> authz
-                        .antMatchers("/gallery").permitAll()
+                        .antMatchers("/gallery/*").permitAll()
                         .antMatchers("/gallery/test").authenticated()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt());

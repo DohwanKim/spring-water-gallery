@@ -1,6 +1,7 @@
 package com.tech.watergallery.home.controller;
 
 import com.tech.watergallery.home.entity.Gallery;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 
@@ -14,6 +15,7 @@ public interface GalleryEndpoint {
     ResponseEntity<List<Gallery>> findAll();
 
     @Data
+    @Builder
     static class GalleryInfo {
         String title;
         String description;

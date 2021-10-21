@@ -1,5 +1,7 @@
 package com.tech.watergallery.home.service;
 
+import com.tech.watergallery.home.controller.GalleryEndpoint;
+import com.tech.watergallery.home.controller.GalleryEndpoint.GalleryInfo;
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.repository.GalleryRepository;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,25 +28,47 @@ public class GalleryServiceTest {
     @Test
     void create() {
         Gallery gallery = Gallery.builder()
-                .description("testDescription")
                 .title("testTitle")
-                .completed(LocalDateTime.now())
+                .description("testDescription")
                 .content("testContent")
+                .completed(NOW)
                 .build();
+        GalleryInfo galleryInfo = GalleryInfo.builder()
+                .title("testTitle")
+                .description("testDescription")
+                .content("testContent")
+                .completed(NOW)
+                .build();
+
         when(galleryRepository.create(gallery)).thenReturn(1);
-        assertThat(target.create(gallery)).isEqualTo(1);
+        assertThat(target.create(galleryInfo)).isEqualTo(1);
         verify(galleryRepository).create(gallery);
     }
 
     @Test
     void update() {
-        when(galleryRepository.update()).thenReturn(1);
-        assertThat(target.update()).isEqualTo(1);
-        verify(galleryRepository).update();
+        long id = 123;
+        Gallery gallery = Gallery.builder()
+                .id(id)
+                .description("testDescription")
+                .title("testTitle")
+                .content("testContent")
+                .completed(NOW)
+                .build();
+        GalleryInfo galleryInfo = GalleryInfo.builder()
+                .description("testDescription")
+                .title("testTitle")
+                .content("testContent")
+                .completed(NOW)
+                .build();
+
+        when(galleryRepository.update(gallery)).thenReturn(1);
+        assertThat(target.update(id, galleryInfo)).isEqualTo(1);
+        verify(galleryRepository).update(gallery);
     }
 
     @Test
-    void find() throws IllegalAccessException {
+    void find() {
         long id = 123;
         Gallery gallery = Gallery.builder()
                                  .id(1L)
@@ -56,16 +79,7 @@ public class GalleryServiceTest {
                                  .build();
 
         when(galleryRepository.find(id)).thenReturn(Optional.of(gallery));
-        assertThat(target.find(id)).isIn(gallery);
-        verify(galleryRepository).find(id);
-    }
-
-    @Test
-    void find__resourceNotFound() {
-        long id = 123;
-
-        when(galleryRepository.find(id)).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> target.find(id)).isInstanceOf(IllegalAccessException.class);
+        assertThat(target.find(id)).isEqualTo(Optional.of(gallery));
         verify(galleryRepository).find(id);
     }
 }

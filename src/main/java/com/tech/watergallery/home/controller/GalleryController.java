@@ -2,6 +2,9 @@ package com.tech.watergallery.home.controller;
 
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.service.GalleryService;
+
+import javax.websocket.server.PathParam;
+
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +20,6 @@ public class GalleryController implements GalleryEndpoint {
     @Override
     @GetMapping("")
     public ResponseEntity<List<Gallery>> findAll() {
-        // aop  custom annotation
         return ResponseEntity.ok(galleryService.findAll());
     }
 
@@ -31,7 +33,7 @@ public class GalleryController implements GalleryEndpoint {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Gallery> find(long id) throws IllegalAccessException {
+    public ResponseEntity<Gallery> find(@PathVariable("id") long id) throws IllegalAccessException {
         Gallery gallery = galleryService.find(id)
                 .orElseThrow(() -> new IllegalAccessException("resource is not exist"));
 
