@@ -1,8 +1,10 @@
 package com.tech.watergallery.home.controller;
 
 import com.tech.watergallery.home.entity.Gallery;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ public interface GalleryEndpoint {
 
     @Data
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     static class GalleryInfo {
         String title;
         String description;

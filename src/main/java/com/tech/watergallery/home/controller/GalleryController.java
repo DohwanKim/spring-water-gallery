@@ -3,8 +3,6 @@ package com.tech.watergallery.home.controller;
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.service.GalleryService;
 
-import javax.websocket.server.PathParam;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -9,11 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @Order(SecurityProperties.BASIC_AUTH_ORDER)
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
+    // TODO: CORS origin register whiteList
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http
                 .authorizeRequests(authz -> authz
-                        .antMatchers("/gallery/*").permitAll()
+                        .antMatchers("/gallery", "/gallery/*").permitAll()
                         .antMatchers("/gallery/test").authenticated()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt());
