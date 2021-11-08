@@ -74,7 +74,7 @@ public class GalleryControllerTest {
         long id = 123;
         Gallery gallery = createGallery(id);
 
-        when(galleryService.find(id)).thenReturn(Optional.of(gallery));
+        when(galleryService.find(id)).thenReturn(gallery);
         mockMvc.perform(get("/gallery/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().string(objectMapper.writeValueAsString(gallery)));
@@ -85,7 +85,7 @@ public class GalleryControllerTest {
     public void find__resourceNotFound() {
         long id = 123;
 
-        when(galleryService.find(id)).thenReturn(Optional.empty());
+        when(galleryService.find(id)).thenReturn(null);
         assertThatThrownBy(() -> mockMvc.perform(get("/gallery/" + id))
                                                     .andExpect(status().is5xxServerError()))
                 .hasCause(new IllegalAccessException("resource is not exist"));

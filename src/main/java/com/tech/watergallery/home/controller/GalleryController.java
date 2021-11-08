@@ -32,8 +32,7 @@ public class GalleryController implements GalleryEndpoint {
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<Gallery> find(@PathVariable("id") long id) throws IllegalAccessException {
-        Gallery gallery = galleryService.find(id)
-                .orElseThrow(() -> new IllegalAccessException("resource is not exist"));
+        Gallery gallery = galleryService.find(id);
 
         return ResponseEntity.ok(gallery);
     }

@@ -78,8 +78,8 @@ public class GalleryServiceTest {
                                  .completed(NOW)
                                  .build();
 
-        when(galleryRepository.find(id)).thenReturn(Optional.of(gallery));
-        assertThat(target.find(id)).isEqualTo(Optional.of(gallery));
+        when(galleryRepository.find(id)).thenReturn(gallery);
+        assertThat(target.find(id)).isEqualTo(gallery);
         verify(galleryRepository).find(id);
     }
 }

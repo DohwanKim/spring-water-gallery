@@ -6,6 +6,8 @@ import com.tech.watergallery.home.repository.GalleryRepository;
 
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,17 @@ import java.util.List;
 @AllArgsConstructor
 public class GalleryService {
     private final GalleryRepository galleryRepository;
+    private final EntityManager em;
 
     public int create(GalleryInfo galleryInfo) {
+        em.getTransaction().begin();
+
+        Gallery gallery = Gallery.builder().build();
+
+        em.persist(gallery);
+
+        em.getTransaction().commit();
+
         return galleryRepository.create(Gallery.builder()
                 .title(galleryInfo.getTitle())
                 .description(galleryInfo.getDescription())
@@ -35,7 +46,7 @@ public class GalleryService {
                 .build());
     }
 
-    public Optional<Gallery> find(long id) {
+    public Gallery find(long id) {
         return galleryRepository.find(id);
     }
 
