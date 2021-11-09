@@ -22,10 +22,10 @@
         INSERT INTO `gallery`
         SET
             `title` = #{title},
-            `description` = 'wefwefwe',
-            `content` = 'asdf',
-            `completed` = NOW(),
-            `img_url` = '',
+            `description` = #{description},
+            `content` = #{content},
+            `completed` = #{completed},
+            `img_url` = #{img_url},
             `created_at` = NOW(),
             `updated_at` = NOW()
     </insert>

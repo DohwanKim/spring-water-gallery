@@ -25,12 +25,12 @@ public class GalleryRepositoryTest {
 
     @Test
     public void create() {
-        LocalDateTime localDateTime = LocalDateTime.now();
         Gallery gallery = Gallery.builder()
                 .title("testTitle")
                 .description("testDescription")
                 .content("testContent")
-                .completed(localDateTime)
+                .img_url("testUrl")
+                .completed(LocalDateTime.now())
                 .build();
 
         target.create(gallery);
