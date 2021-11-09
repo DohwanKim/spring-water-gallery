@@ -33,7 +33,7 @@ public class GalleryRepositoryTest {
                 .completed(localDateTime)
                 .build();
 
-        target.create(gallery);
+        target.save(gallery);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class GalleryRepositoryTest {
                            "SET id=?, title=?, description=?, content=?, completed=?, updated_at=NOW()",
                             gallery.getId(), gallery.getTitle(), gallery.getDescription(), gallery.getContent(), gallery.getCompleted().toString());
 
-        assertThat(target.find(gallery.getId())).isEqualTo(Optional.of(gallery));
+        assertThat(target.findPk(gallery.getId())).isEqualTo(Optional.of(gallery));
     }
 
     @Test

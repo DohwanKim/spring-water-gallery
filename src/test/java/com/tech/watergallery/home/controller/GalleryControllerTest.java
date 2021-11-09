@@ -1,24 +1,9 @@
 package com.tech.watergallery.home.controller;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tech.watergallery.home.controller.GalleryEndpoint.GalleryInfo;
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.service.GalleryService;
-
-import java.time.LocalDateTime;
-
-import java.util.List;
-
-import java.util.Optional;
-
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +11,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 public class GalleryControllerTest {
@@ -57,7 +52,10 @@ public class GalleryControllerTest {
                 .title("testTitle")
                 .description("testDescription")
                 .content("testContent")
+                .img_url("test_url")
                 .completed(NOW)
+                .created_at(NOW)
+                .updated_at(NOW)
                 .build();
 
         when(galleryService.create(galleryInfo)).thenReturn(1);
@@ -99,7 +97,10 @@ public class GalleryControllerTest {
                 .title("testTitle")
                 .description("testDescription")
                 .content("testContent")
+                .img_url("test_url")
                 .completed(NOW)
+                .created_at(NOW)
+                .updated_at(NOW)
                 .build();
 
         when(galleryService.update(id, galleryInfo)).thenReturn(1);
@@ -116,7 +117,10 @@ public class GalleryControllerTest {
                 .title("testTitle")
                 .description("testDescription")
                 .content("testContent")
+                .img_url("test_url")
                 .completed(NOW)
+                .created_at(NOW)
+                .updated_at(NOW)
                 .build();
     }
 }

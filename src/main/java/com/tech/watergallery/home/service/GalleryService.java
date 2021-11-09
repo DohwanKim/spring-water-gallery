@@ -4,8 +4,6 @@ import com.tech.watergallery.home.controller.GalleryEndpoint.GalleryInfo;
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.repository.GalleryRepository;
 
-import java.util.Optional;
-
 import javax.persistence.EntityManager;
 
 import lombok.AllArgsConstructor;
@@ -20,34 +18,40 @@ public class GalleryService {
     private final EntityManager em;
 
     public int create(GalleryInfo galleryInfo) {
-        em.getTransaction().begin();
-
-        Gallery gallery = Gallery.builder().build();
-
-        em.persist(gallery);
-
-        em.getTransaction().commit();
-
-        return galleryRepository.create(Gallery.builder()
+        Gallery gallery = Gallery.builder()
                 .title(galleryInfo.getTitle())
                 .description(galleryInfo.getDescription())
                 .content(galleryInfo.getContent())
+                .img_url(galleryInfo.getImg_url())
                 .completed(galleryInfo.getCompleted())
-                .build());
+                .created_at(galleryInfo.getCreated_at())
+                .updated_at(galleryInfo.getUpdated_at())
+                .build();
+
+        //id가 null이면 insert로 실행됨
+        galleryRepository.saveAndFlush(gallery);
+        return gallery.getId().intValue();
     }
 
     public int update(long id, GalleryInfo galleryInfo) {
-        return galleryRepository.update(Gallery.builder()
-                .id(id)
+
+        Gallery gallery = Gallery.builder()
                 .title(galleryInfo.getTitle())
                 .description(galleryInfo.getDescription())
                 .content(galleryInfo.getContent())
+                .img_url(galleryInfo.getImg_url())
                 .completed(galleryInfo.getCompleted())
-                .build());
+                .created_at(galleryInfo.getCreated_at())
+                .updated_at(galleryInfo.getUpdated_at())
+                .build();
+
+        //id가 null이 아니면 update로 실행됨
+        galleryRepository.saveAndFlush(gallery);
+        return gallery.getId().intValue();
     }
 
     public Gallery find(long id) {
-        return galleryRepository.find(id);
+        return galleryRepository.findPk(id);
     }
 
     public List<Gallery> findAll() {

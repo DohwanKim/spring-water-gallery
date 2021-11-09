@@ -24,6 +24,9 @@ public interface GalleryEndpoint {
         String title;
         String description;
         String content;
+        String img_url;
         LocalDateTime completed;
+        LocalDateTime created_at;
+        LocalDateTime updated_at;
     }
 }

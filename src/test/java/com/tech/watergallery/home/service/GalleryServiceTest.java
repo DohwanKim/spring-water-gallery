@@ -1,6 +1,5 @@
 package com.tech.watergallery.home.service;
 
-import com.tech.watergallery.home.controller.GalleryEndpoint;
 import com.tech.watergallery.home.controller.GalleryEndpoint.GalleryInfo;
 import com.tech.watergallery.home.entity.Gallery;
 import com.tech.watergallery.home.repository.GalleryRepository;
@@ -10,7 +9,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
@@ -40,9 +38,9 @@ public class GalleryServiceTest {
                 .completed(NOW)
                 .build();
 
-        when(galleryRepository.create(gallery)).thenReturn(1);
+        when(galleryRepository.save(gallery).getId().intValue()).thenReturn(1);
         assertThat(target.create(galleryInfo)).isEqualTo(1);
-        verify(galleryRepository).create(gallery);
+        verify(galleryRepository).save(gallery);
     }
 
     @Test
@@ -62,9 +60,9 @@ public class GalleryServiceTest {
                 .completed(NOW)
                 .build();
 
-        when(galleryRepository.update(gallery)).thenReturn(1);
+        when(galleryRepository.save(gallery).getId().intValue()).thenReturn(1);
         assertThat(target.update(id, galleryInfo)).isEqualTo(1);
-        verify(galleryRepository).update(gallery);
+        verify(galleryRepository).save(gallery);
     }
 
     @Test
@@ -78,8 +76,8 @@ public class GalleryServiceTest {
                                  .completed(NOW)
                                  .build();
 
-        when(galleryRepository.find(id)).thenReturn(gallery);
+        when(galleryRepository.findPk(id)).thenReturn(gallery);
         assertThat(target.find(id)).isEqualTo(gallery);
-        verify(galleryRepository).find(id);
+        verify(galleryRepository).findPk(id);
     }
 }
