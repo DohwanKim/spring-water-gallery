@@ -117,7 +117,7 @@ public class GalleryControllerTest {
                 .title("testTitle")
                 .description("testDescription")
                 .content("testContent")
-                .img_url("test_url")
+                .image("test_url")
                 .completed(NOW)
                 .created_at(NOW)
                 .updated_at(NOW)
