@@ -22,6 +22,10 @@ public class Gallery implements Serializable {
     @Column(name="id")
     private Long id;
 
+
+    //@OneToMany
+    //@ManyToOne
+
     @Column(name="title", nullable=false, length=100)
     private String title;
 

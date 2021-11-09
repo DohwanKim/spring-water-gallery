@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class GalleryService {
     private final GalleryRepository galleryRepository;
     private final EntityManager em;
 
+    @Transactional
     public int create(GalleryInfo galleryInfo) {
         Gallery gallery = Gallery.builder()
                 .title(galleryInfo.getTitle())
