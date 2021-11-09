@@ -12,7 +12,10 @@
         title,
         description,
         content,
-        compledted
+        completed,
+        img_url,
+        created_at,
+        updated_at
     </sql>
 
     <insert id="create" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
@@ -22,6 +25,8 @@
             `description` = 'wefwefwe',
             `content` = 'asdf',
             `completed` = NOW(),
+            `img_url` = '',
+            `created_at` = NOW(),
             `updated_at` = NOW()
     </insert>
 
@@ -32,7 +37,7 @@
     </select>
 
     <select id="findAll" resultMap="entity">
-        SELECT <include refid="selectColumns"/>
+        SELECT id, title
         FROM `gallery`
     </select>
 

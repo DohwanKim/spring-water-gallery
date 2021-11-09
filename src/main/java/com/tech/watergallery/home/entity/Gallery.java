@@ -15,4 +15,7 @@ public class Gallery {
     private String description;
     private String content;
     private LocalDateTime completed;
+    private String img_url;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 }
