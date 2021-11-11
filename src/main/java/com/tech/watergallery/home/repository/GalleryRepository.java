@@ -20,4 +20,6 @@ public interface GalleryRepository extends JpaRepository<Gallery, Long> {
     // 이 서버의 시간이 아니라 db서버의 현제 시간을 사용하고 싶음
     
     // ㄴ 답변: mysql db default 값에다가 CURRENT_TIMESTAMP 넣으면 댐.
+    // @Column(name = "dregister", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    // entity에서는 저런식으로
 }
